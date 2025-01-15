@@ -28,6 +28,7 @@ dependencies = [
     "cryptography ~= 44.0.0",
     "clipthread-server ~= 0.0.1",
     "sv_ttk ~= 2.6.0",
+    "pynput ~= 1.7.7",
 ]
 
 [project.optional-dependencies]
