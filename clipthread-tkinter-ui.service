@@ -1,0 +1,15 @@
+[Unit]
+Description=ClipThread Tkinter UI Service
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/%i/.Xauthority
+ExecStart=ExecStart=/home/%i/.local/bin/clipthread-ui
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
