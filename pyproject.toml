@@ -26,7 +26,7 @@ dependencies = [
     "pydantic ~= 2.10.4",
     "python-dotenv ~= 1.0.1",
     "cryptography ~= 44.0.0",
-    "clipthread-server ~= 0.0.1",
+    "clipthread-server ~= 0.0.2",
     "sv_ttk ~= 2.6.0",
     "pynput ~= 1.7.7",
 ]
@@ -47,11 +47,10 @@ Repository = "https://github.com/clipthread/clipthread-ui-tkinter.git"
 Documentation = "https://github.com/clipthread/clipthread-ui-tkinter#readme"
 "Bug Tracker" = "https://github.com/clipthread/clipthread-ui-tkinter/issues"
 
-[tool.hatch.build.targets.copy]
-packages = ["clipthread-tkinter-ui"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["."]
+include = ["book.png", "clipthread-tkinter-ui.service"]
 
 [tool.black]
 line-length = 120
@@ -65,10 +64,4 @@ multi_line_output = 3
 clipthread-ui = "ui:start_ui"
 clipthread-ui-install = "service_install:install_systemd_service"
 
-[tool.hatch.envs.systemd]
-post-install-commands = [
-    "cp clipthread-tkinter-ui.service /etc/systemd/system/clipthread-tkinter-ui.service",
-    "systemctl daemon-reload",
-    "systemctl enable clipthread-tkinter-ui",
-    "systemctl start clipthread-tkinter-ui",
-]
+

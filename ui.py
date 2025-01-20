@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import PhotoImage  
 import sv_ttk
 from pynput import keyboard
 import threading
 import pyperclip
+import os
 
 from clipthread.server.feign import ClipboardClient
 from clipthread.core.models.clipboard import Clipboard
@@ -16,7 +18,8 @@ class TableWindow:
 
         # create main windows
         self.root = tk.Tk()
-        self.root.title("")
+        self.root.title("Clipthread")
+        self.root.iconphoto(True, PhotoImage(file = os.path.join(os.path.dirname(__file__), 'book.png')))
         self.root.geometry('300x200+100+100')
         
         # Flag to track window visibility
@@ -62,14 +65,14 @@ class TableWindow:
         table_frame.pack(fill='both', expand=True)
         
         self.tree = ttk.Treeview(table_frame, 
-                                columns=('UUID', 'Value'),
+                                columns=('Value',),
                                 show='headings',
                                 selectmode='browse')
         
-        self.tree.heading('UUID', text='UUID')
+        # self.tree.heading('UUID', text='UUID')
         self.tree.heading('Value', text='Value')
         
-        self.tree.column('UUID', width=50, stretch=True)
+        # self.tree.column('UUID', width=50, stretch=True)
         self.tree.column('Value', width=200, stretch=True)
         
         scrollbar = ttk.Scrollbar(table_frame, orient='vertical', 
@@ -189,7 +192,8 @@ class TableWindow:
         rows: list[Clipboard] = self.client.get_all_clipboards()
         for row in rows:
             self.uuid_to_complete[str(row.id)] = row.text
-            self.tree.insert('', 'end', values=(str(row.id), self.truncate_text(row.text)))
+            # self.tree.insert('', 'end', values=(str(row.id), self.truncate_text(row.text)))
+            self.tree.insert('', 'end', values=(self.truncate_text(row.text), ))
     
     def run(self):
         self.root.mainloop()
