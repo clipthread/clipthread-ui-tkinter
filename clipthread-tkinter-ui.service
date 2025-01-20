@@ -7,7 +7,8 @@ Type=simple
 User=%i
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/%i/.Xauthority
-ExecStart=ExecStart=/home/%i/.local/bin/clipthread-ui
+Environment=DATABASE_URL=/home/%i/.clipthread/db.sqlite
+ExecStart=/home/%i/.local/bin/clipthread-ui
 Restart=on-failure
 RestartSec=5s
 
